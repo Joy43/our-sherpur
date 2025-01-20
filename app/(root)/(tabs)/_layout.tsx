@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
-import { Image, ImageSourcePropType, View } from "react-native";
+import { Image, View } from "react-native";
+import clsx from "clsx";
 
 import { icons } from "@/constants";
 
@@ -7,27 +8,20 @@ const TabIcon = ({
   source,
   focused,
 }: {
-  source: ImageSourcePropType;
+  source: any;
   focused: boolean;
 }) => (
   <View
-    style={{
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      borderRadius: 50,
-      backgroundColor: focused ? "#E1E3FF" : "transparent",
-    }}
+    className={clsx(
+      "flex-row justify-center items-center rounded-full",
+      focused ? "bg-[#E1E3FF]" : "bg-transparent"
+    )}
   >
     <View
-      style={{
-        borderRadius: 50,
-        width: 48,
-        height: 48,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: focused ? "#6C63FF" : "transparent",
-      }}
+      className={clsx(
+        "rounded-full w-12 h-12 flex justify-center items-center",
+        focused ? "bg-[#6C63FF]" : "bg-transparent"
+      )}
     >
       <Image
         source={source}
@@ -63,6 +57,7 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.home} focused={focused} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -72,6 +67,7 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.list} focused={focused} />
           ),
+          headerShown: false, // Header is hidden for this tab
         }}
       />
       <Tabs.Screen
@@ -81,6 +77,7 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.profile} focused={focused} />
           ),
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -90,6 +87,7 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => (
             <TabIcon source={icons.developer} focused={focused} />
           ),
+          headerShown: false, // Header is hidden for this tab
         }}
       />
     </Tabs>
